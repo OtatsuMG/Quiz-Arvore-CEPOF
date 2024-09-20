@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=0.75, maximum-scale=0.75, user-scalable=no">
+    <title>Teste seu conhecimento sobre Árvores</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Estilos para a interface de resposta */
+        #response-message {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            z-index: 1000;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body>
+    <!-- Tela inicial -->
+    <div id="start-screen">
+        <h1>Quiz sobre árvores</h1>
+        <p>O quanto você sabe sobre árvores?</p>
+        <button id="start-button">Iniciar</button>
+    </div>
+
+    <!-- Tela do quiz -->
+    <div id="quiz-container" style="display: none;">
+        <h1>Quiz: Nível Médio</h1>
+        <img id="quiz-image" src="" alt="Quiz Image">
+        <div id="question"></div>
+        <div id="options"></div>
+        <button id="hint-button">Dica</button>
+        <div id="score">Pontuação: 0</div>
+    </div>
+
+    <!-- Tela final -->
+    <div id="end-screen" style="display: none;">
+        <h1>Parabéns!</h1>
+        <p>Sua pontuação foi: <span id="final-score"></span></p>
+        <button id="restart-button">Voltar à tela inicial</button>
+    </div>
+
+    <!-- Interface de resposta -->
+    <div id="response-message"></div>
+
+    <script>
+        const questions = [
+            {
+                image: 'imagens arvores/ipe-amarelo.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Ipê Amarelo', 'Pau-Brasil', 'Jacarandá', 'Cedro'],
+                answer: 'Ipê Amarelo',
+                hint: 'É conhecida por suas flores amarelas brilhantes e é símbolo do Brasil.'
+            },
+            {
+                image: 'imagens arvores/araucaria.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Araucária', 'Pinheiro', 'Cedro', 'Carvalho'],
+                answer: 'Araucária',
+                hint: 'É uma árvore nativa do sul do Brasil e produz pinhões.'
+            },
+            {
+                image: 'imagens arvores/pau-brasil.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Pau-Brasil', 'Cedro', 'Jacarandá', 'Ipê Amarelo'],
+                answer: 'Pau-Brasil',
+                hint: 'Árvore nativa do Brasil que deu origem ao nome do país.'
+            },
+            {
+                image: 'imagens arvores/jacaranda.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Jacarandá', 'Ipê Roxo', 'Pau-Brasil', 'Cedro'],
+                answer: 'Jacarandá',
+                hint: 'É conhecida por sua madeira escura e resistente, além de suas flores roxas.'
+            },
+            {
+                image: 'imagens arvores/cedro.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Cedro', 'Pau-Brasil', 'Araucária', 'Carvalho'],
+                answer: 'Cedro',
+                hint: 'Árvore conhecida por sua madeira nobre, usada na construção civil e mobiliário.'
+            },
+            {
+                image: 'imagens arvores/carvalho.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Carvalho', 'Cedro', 'Araucária', 'Jequitibá'],
+                answer: 'Carvalho',
+                hint: 'Árvore de madeira forte, símbolo de resistência e sabedoria.'
+            },
+            {
+                image: 'imagens arvores/jequitiba.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Jequitibá', 'Sibipiruna', 'Copaíba', 'Buriti'],
+                answer: 'Jequitibá',
+                hint: 'Uma das árvores mais altas da floresta tropical brasileira.'
+            },
+            {
+                image: 'imagens arvores/copaiba.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Copaíba', 'Aroeira', 'Buriti', 'Jatobá'],
+                answer: 'Copaíba',
+                hint: 'Famosa por seu óleo medicinal, extraído de seu tronco.'
+            },
+            {
+                image: 'imagens arvores/aroeira.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Aroeira', 'Copaíba', 'Cedro', 'Pau-Brasil'],
+                answer: 'Aroeira',
+                hint: 'Árvore medicinal conhecida por suas propriedades anti-inflamatórias.'
+            },
+            {
+                image: 'imagens arvores/buriti.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Buriti', 'Jatobá', 'Aroeira', 'Carvalho'],
+                answer: 'Buriti',
+                hint: 'Uma palmeira de regiões úmidas, cujo fruto é muito utilizado na culinária.'
+            },
+            {
+                image: 'imagens arvores/jatoba.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Jatobá', 'Jequitibá', 'Copaíba', 'Sibipiruna'],
+                answer: 'Jatobá',
+                hint: 'Produz uma madeira muito resistente e frutos comestíveis.'
+            },
+            {
+                image: 'imagens arvores/sibipiruna.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Sibipiruna', 'Ipê Amarelo', 'Jacarandá', 'Buriti'],
+                answer: 'Sibipiruna',
+                hint: 'Árvore ornamental, muito utilizada em áreas urbanas.'
+            },
+            {
+                image: 'imagens arvores/pinheiro.jpg',
+                question: 'Qual árvore é esta?',
+                options: ['Pinheiro', 'Cedro', 'Araucária', 'Carvalho'],
+                answer: 'Pinheiro',
+                hint: 'Uma árvore bastante associada ao clima frio e muito utilizada como árvore de Natal.'
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+        let score = 0;
+
+        function shuffle(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function shuffleQuestions() {
+            shuffle(questions);
+        }
+
+        function loadQuestion() {
+            const currentQuestion = questions[currentQuestionIndex];
+            document.getElementById('quiz-image').src = currentQuestion.image;
+            document.getElementById('question').innerText = currentQuestion.question;
+            
+            // Embaralhar opções de resposta
+            const options = [...currentQuestion.options];
+            shuffle(options);
+
+            const optionsContainer = document.getElementById('options');
+            optionsContainer.innerHTML = '';
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.innerText = option;
+                button.onclick = () => checkAnswer(option);
+                optionsContainer.appendChild(button);
+            });
+
+            // Configurar o botão de dica
+            document.getElementById('hint-button').onclick = () => {
+                alert(currentQuestion.hint);
+            };
+        }
+
+        function showResponseMessage(message) {
+            const responseMessageDiv = document.getElementById('response-message');
+            responseMessageDiv.innerText = message;
+            responseMessageDiv.style.display = 'block';
+            setTimeout(() => {
+                responseMessageDiv.style.display = 'none';
+            }, 2000); // Ocultar a mensagem após 2 segundos
+        }
+
+        function checkAnswer(selected) {
+            const currentQuestion = questions[currentQuestionIndex];
+            if (selected === currentQuestion.answer) {
+                score++;
+                showResponseMessage('Correto!');
+            } else {
+                showResponseMessage('Errado! A resposta certa é ' + currentQuestion.answer);
+            }
+            updateScore();
+            currentQuestionIndex++;
+            if (currentQuestionIndex < questions.length) {
+                loadQuestion();
+            } else {
+                showEndScreen();
+            }
+        }
+
+        function updateScore() {
+            document.getElementById('score').innerText = 'Pontuação: ' + score;
+        }
+
+        function showEndScreen() {
+            document.getElementById('quiz-container').style.display = 'none';
+            document.getElementById('end-screen').style.display = 'flex';
+            document.getElementById('final-score').innerText = `${score}/${questions.length}`;
+        }
+
+        function restartQuiz() {
+            score = 0;
+            currentQuestionIndex = 0;
+            updateScore();
+            shuffleQuestions();
+            document.getElementById('end-screen').style.display = 'none';
+            document.getElementById('start-screen').style.display = 'flex';
+        }
+
+        document.getElementById('start-button').onclick = () => {
+            document.getElementById('start-screen').style.display = 'none';
+            document.getElementById('quiz-container').style.display = 'block';
+            shuffleQuestions();
+            loadQuestion();
+        };
+
+        document.getElementById('restart-button').onclick = () => {
+            restartQuiz();
+        };
+    </script>
+</body>
+</html>

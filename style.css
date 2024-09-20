@@ -1,0 +1,209 @@
+/* Tela inicial */
+#start-screen {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-color: #e3f2fd; /* Cor de fundo azul claro */
+    color: #2e7d32; /* Texto verde escuro */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#start-screen h1 {
+    font-size: 3.5em; /* Aumentar o tamanho do título */
+    margin-bottom: 30px;
+    color: #388e3c; /* Verde escuro */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.2); /* Sombra no texto */
+}
+
+#start-button {
+    background-color: #4caf50; /* Verde */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra no botão */
+}
+
+#start-button:hover {
+    background-color: #388e3c; /* Verde escuro ao passar o mouse */
+    transform: scale(1.05);
+}
+
+/* Tela do quiz */
+#quiz-container {
+    display: none; /* Esconde o quiz até ser iniciado */
+    text-align: center;
+    background: linear-gradient(135deg, #ffffff, #e0f7fa); /* Gradiente de fundo */
+    padding: 30px;
+    border-radius: 20px; /* Bordas mais arredondadas */
+    box-shadow: 0 6px 30px rgba(0, 0, 0, 0.3); /* Sombra mais pronunciada */
+    width: 80%;
+    max-width: 800px;
+    box-sizing: border-box;
+    margin: 0 auto;
+    margin-top: 50px;
+}
+
+h1 {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #388e3c; /* Verde mais escuro */
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 2.5em;
+    color: #388e3c; /* Verde mais escuro */
+
+}
+img {
+    width: 100%; /* Ajusta a largura da imagem para caber no contêiner */
+    max-width: 100%; /* Define a largura máxima da imagem */
+    height: auto; /* Mantém a proporção da imagem */
+    max-height: 400px; /* Define uma altura máxima para a imagem */
+    object-fit: cover; /* Cobre o contêiner sem distorcer a imagem */
+    border-radius: 15px; /* Bordas arredondadas */
+    margin-bottom: 20px;
+    border: 5px solid #4caf50; /* Borda verde ao redor da imagem */
+}
+
+#question {
+    font-size: 1.5em;
+    margin-bottom: 20px;
+    font-weight: bold;
+    color: #4caf50; /* Verde do texto */
+}
+
+#options {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+button {
+    width: 45%;
+    margin: 10px;
+    padding: 15px;
+    border: none;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    background: linear-gradient(135deg, #4caf50, #66bb6a); /* Gradiente de fundo */
+    color: white;
+    font-size: 1em;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra no botão */
+}
+
+button:hover {
+    background: linear-gradient(135deg, #388e3c, #4caf50); /* Gradiente escuro ao passar o mouse */
+    transform: scale(1.05);
+}
+
+#hint-button {
+    background: linear-gradient(135deg, #ffa000, #ffb300); /* Gradiente amarelo */
+}
+
+#hint-button:hover {
+    background: linear-gradient(135deg, #ff8f00, #ffa000); /* Gradiente amarelo escuro */
+}
+
+#score {
+    margin-top: 20px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #388e3c; /* Verde escuro */
+}
+
+/* Tela final */
+#end-screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background: linear-gradient(135deg, #e3f2fd, #bbdefb); /* Gradiente de fundo */
+    color: #2e7d32; /* Texto verde escuro */
+    text-align: center;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+#end-screen h1 {
+    font-size: 3em;
+    margin-bottom: 20px;
+    color: #388e3c; /* Verde escuro */
+}
+
+#end-screen p {
+    font-size: 1.5em;
+    margin-bottom: 30px;
+}
+
+#restart-button {
+    background: linear-gradient(135deg, #4caf50, #66bb6a); /* Gradiente de verde */
+    color: white;
+    padding: 15px 30px;
+    font-size: 1.5em;
+    border: none;
+    border-radius: 12px; /* Bordas mais arredondadas */
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra no botão */
+}
+
+#restart-button:hover {
+    background: linear-gradient(135deg, #388e3c, #4caf50); /* Gradiente escuro ao passar o mouse */
+    transform: scale(1.05);
+}
+/* Estilos para a interface de resposta */
+#response-message {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: #ffffff; /* Fundo branco */
+    color: #333; /* Texto escuro */
+    padding: 30px; /* Aumenta o espaçamento */
+    border-radius: 15px; /* Bordas mais arredondadas */
+    text-align: center;
+    z-index: 1000;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5); /* Sombra mais pronunciada */
+    animation: fadeIn 0.5s; /* Animação de entrada */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translate(-50%, -45%);
+    }
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%);
+    }
+}
+
+.response-button {
+    background-color: #4caf50; /* Verde */
+    color: white;
+    padding: 12px 25px; /* Aumenta o tamanho do botão */
+    font-size: 1.2em; /* Aumenta o tamanho da fonte */
+    border: none;
+    border-radius: 10px; /* Bordas arredondadas */
+    cursor: pointer;
+    transition: background-color 0.3s, transform 0.2s;
+    margin-top: 15px; /* Espaçamento acima do botão */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Sombra no botão */
+}
+
+.response-button:hover {
+    background-color: #388e3c; /* Verde escuro ao passar o mouse */
+    transform: scale(1.05); /* Efeito de escala ao passar o mouse */
+}
